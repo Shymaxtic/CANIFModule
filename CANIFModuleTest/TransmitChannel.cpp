@@ -43,6 +43,7 @@ bool TransmitChannel::Deactive() {
         do {
             std::lock_guard<std::mutex> lock(mTransmitTriggerLock);
             mStop = true;
+            mTxSem.Up();
         } while (0);
         mTransThread->join();
         mTransThread = nullptr;
@@ -52,6 +53,7 @@ bool TransmitChannel::Deactive() {
 }
 
 std::deque<can_frame_ptr> TransmitChannel::ReadFifo() {
+    mTxSem.Down();
     std::lock_guard<std::mutex> lker(mFifoLock);
     std::deque<can_frame_ptr> ret = mTxFifo;
     mTxFifo.clear();
@@ -64,6 +66,7 @@ void TransmitChannel::WriteFifo(const std::deque<can_frame_ptr> &frames) {
             it != frames.end(); ++it) {
         mTxFifo.push_back(*it);
     }
+    mTxSem.Up();
 }
 
 void TransmitChannel::TransmitThreadFunc(TransmitChannel &transmitCh) {

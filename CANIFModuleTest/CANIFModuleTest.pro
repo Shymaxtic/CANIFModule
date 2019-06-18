@@ -8,7 +8,8 @@ SOURCES += main.cpp \
     CANService.cpp \
     CANSocketIF.cpp \
     ReceiveChannel.cpp \
-    TransmitChannel.cpp
+    TransmitChannel.cpp \
+    Semaphore.cpp
 
 HEADERS += \
     CANIF.h \
@@ -17,7 +18,8 @@ HEADERS += \
     Debug.h \
     ReceiveChannel.h \
     CANIFModule.h \
-    TransmitChannel.h
+    TransmitChannel.h \
+    Semaphore.h
 
 QMAKE_CXXFLAGS += -std=c++0x -pthread
 LIBS += -pthread

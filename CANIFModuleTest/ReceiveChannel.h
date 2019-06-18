@@ -26,8 +26,6 @@ class ReceiveChannel {
         bool Active();
         bool Deactive();
         std::deque<can_frame>       ReadFifo();
-        void                        WriteFifo(const std::deque<can_frame> &frames);
-        void                        WriteFifo(const can_frame &frame);
         template<typename Callable, typename ...Args>
         bool RegisterReceiveCallback(Callable &&callback, Args &&... _args) {
             std::function<void(void)> bindFunc = std::bind(std::forward<Callable>(callback),
@@ -37,6 +35,8 @@ class ReceiveChannel {
             return true;
         }
     private:
+        void                            WriteFifo(const std::deque<can_frame> &frames);
+        void                            WriteFifo(const can_frame &frame);
         bool                            mStop               = true;
         std::unique_ptr<std::thread>    mRcvThread          = nullptr;
         std::mutex                      mReceiveTriggerLock;

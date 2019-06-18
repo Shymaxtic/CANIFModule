@@ -18,6 +18,7 @@
 #ifndef TRANSMITCHANNEL_H
 #define TRANSMITCHANNEL_H
 #include "CANIF.h"
+#include "Semaphore.h"
 
 class TransmitChannel {
     public:
@@ -25,7 +26,6 @@ class TransmitChannel {
         ~TransmitChannel();
         bool Active();
         bool Deactive();
-        std::deque<can_frame_ptr>       ReadFifo();
         void                        WriteFifo(const std::deque<can_frame_ptr> &frames);
         template<typename Callable, typename ...Args>
         bool RegisterTransmitCallback(Callable &&callback, Args &&... _args) {
@@ -36,11 +36,13 @@ class TransmitChannel {
             return true;
         }
     private:
+        std::deque<can_frame_ptr>       ReadFifo();
         bool                            mStop               = true;
         std::unique_ptr<std::thread>    mTransThread          = nullptr;
         std::mutex                      mTransmitTriggerLock;
-        std::deque<can_frame_ptr>           mTxFifo;
+        std::deque<can_frame_ptr>       mTxFifo;
         std::mutex                      mFifoLock;
+        Semaphore                       mTxSem;
         std::function<void(void)>       mCallback;
         static void TransmitThreadFunc(TransmitChannel &);
         CANIF &mCANIf;
