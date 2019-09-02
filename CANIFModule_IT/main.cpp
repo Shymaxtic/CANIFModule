@@ -1,20 +1,7 @@
 #include <iostream>
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-
-#include <net/if.h>
-#include <sys/ioctl.h>
-#include <sys/socket.h>
-
-#include <linux/can.h>
-#include <linux/can/raw.h>
-
-using namespace std;
 #include "CANIFModule.h"
 #include "Debug.h"
+#include <unistd.h>
 
 static void ReceiveCallback(const can_frame_ptr &frm) {
     std::cerr << std::hex << frm->can_id << std::endl;
@@ -46,8 +33,10 @@ int main(int argc, char *argv[]) {
         usleep(10);
     }
     getchar();
-    CANServiceManager::GetInstance().Deactive("vcan0");
-    CANServiceManager::GetInstance().Disconnect("vcan0");
+    ret = CANServiceManager::GetInstance().Deactive("vcan0");
+    if (ret != S_OK) goto __finish;
+    ret = CANServiceManager::GetInstance().Disconnect("vcan0");
+    if (ret != S_OK) goto __finish;
 
 __finish:
     ERR_MSG(ret);
