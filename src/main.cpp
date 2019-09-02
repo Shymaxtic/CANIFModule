@@ -16,39 +16,41 @@ using namespace std;
 #include "CANIFModule.h"
 #include "Debug.h"
 
-static void ReceiveCallback(ReceiveChannel &rcvCh) {
-    std::deque<can_frame> rx = rcvCh.ReadFifo();
-    for (std::deque<can_frame>::iterator it = rx.begin();
-            it != rx.end(); ++it) {
-        can_frame frame = *it;
-        DBG_VAR(frame.can_id);
-    }
+static void ReceiveCallback(const can_frame_ptr &frm) {
+    std::cerr << std::hex << frm->can_id << std::endl;
 }
 
 
 int main(int argc, char *argv[]) {
-    if (CANService::GetInstance().CreateConnection("vcan0")) {
-        CANIFPtr vcan0 = CANService::GetInstance().Device("vcan0");
-        if (vcan0 != nullptr) {
-            vcan0->GetReceiveChannel()->RegisterReceiveCallback(ReceiveCallback);
-            vcan0->Active();
-            getchar();
-            DBG_MSG("Start transmiting...");
-            for (uint8_t i = 0; i < 100; i++) {
-                std::deque<can_frame_ptr> frames;
-                for (uint8_t j = 0; j < 5; j++) {
-                    can_frame_ptr frame(new can_frame);
-                    frame->can_id = i;
-                    frame->can_dlc = 8;
-                    frames.push_back(frame);
-                }
-                vcan0->GetTransmitChannel()->WriteFifo(frames);
-                usleep(100000);
+    int ret = CANServiceManager::GetInstance().Connect("vcan0");
+    if (ret != S_OK) goto __finish;
+
+    ret = CANServiceManager::GetInstance().RegisterReceiveCallback("vcan0", ReceiveCallback);
+    if (ret != S_OK) goto __finish;
+
+    ret = CANServiceManager::GetInstance().Active("vcan0");
+    if (ret != S_OK) goto __finish;
+
+    getchar();
+    DBG_MSG("Start transmiting...");
+    for (uint8_t i = 0; i < 128; i++) {
+        for (uint8_t j = 0; j < 5; j++) {
+            can_frame_ptr frame(new can_frame);
+            frame->can_id = i;
+            frame->can_dlc = 8;
+            ret = CANServiceManager::GetInstance().Send("vcan0", frame);
+            if (ret != S_OK) {
+                ERR_MSG(ret);
             }
-            getchar();
-            vcan0->Deactive();
         }
+        usleep(1000);
     }
+    getchar();
+    CANServiceManager::GetInstance().Deactive("vcan0");
+    CANServiceManager::GetInstance().Disconnect("vcan0");
+
+__finish:
+    ERR_MSG(ret);
     return 0;
 }
 

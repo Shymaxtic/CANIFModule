@@ -22,21 +22,28 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-SOURCES += CANIF.cpp \
-    CANService.cpp \
+SOURCES += \
+    CANChannel.cpp \
+    CANFrameFIFO.cpp \
+    CANReceiveChannel.cpp \
+    CANServiceIF.cpp \
+    CANServiceManager.cpp \
     CANSocketIF.cpp \
-    ReceiveChannel.cpp \
-    Semaphore.cpp \
-    TransmitChannel.cpp
+    CANTransmitChannel.cpp \
+    Semaphore.cpp
 
-HEADERS += CANIF.h \
+HEADERS += \
+    CANChannel.h \
+    CANFrameFIFO.h \
     CANIFModule.h \
-    CANService.h \
+    CANReceiveChannel.h \
+    CANServiceIF.h \
+    CANServiceManager.h \
     CANSocketIF.h \
+    CANTransmitChannel.h \
     Debug.h \
-    ReceiveChannel.h \
     Semaphore.h \
-    TransmitChannel.h
+    SystemDefine.h
 
 unix {
     target.path = /usr/lib

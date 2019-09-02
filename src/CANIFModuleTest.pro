@@ -3,23 +3,28 @@ CONFIG += console c++11
 CONFIG -= app_bundle
 CONFIG -= qt
 
-SOURCES += main.cpp \
-    CANIF.cpp \
-    CANService.cpp \
+SOURCES += main.cpp  \
+    CANChannel.cpp \
+    CANFrameFIFO.cpp \
+    CANReceiveChannel.cpp \
+    CANServiceIF.cpp \
+    CANServiceManager.cpp \
     CANSocketIF.cpp \
-    ReceiveChannel.cpp \
-    TransmitChannel.cpp \
+    CANTransmitChannel.cpp \
     Semaphore.cpp
 
 HEADERS += \
-    CANIF.h \
-    CANService.h \
-    CANSocketIF.h \
-    Debug.h \
-    ReceiveChannel.h \
+    CANChannel.h \
+    CANFrameFIFO.h \
     CANIFModule.h \
-    TransmitChannel.h \
-    Semaphore.h
+    CANReceiveChannel.h \
+    CANServiceIF.h \
+    CANServiceManager.h \
+    CANSocketIF.h \
+    CANTransmitChannel.h \
+    Debug.h \
+    Semaphore.h \
+    SystemDefine.h
 
 QMAKE_CXXFLAGS += -std=c++0x -pthread
 LIBS += -pthread
