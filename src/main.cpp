@@ -33,17 +33,17 @@ int main(int argc, char *argv[]) {
 
     getchar();
     DBG_MSG("Start transmiting...");
-    for (uint8_t i = 0; i < 128; i++) {
-        for (uint8_t j = 0; j < 5; j++) {
+    for (uint32_t i = 0; i < 10000; i++) {
+        for (uint8_t j = 0; j < 1; j++) {
             can_frame_ptr frame(new can_frame);
-            frame->can_id = i;
+            frame->can_id = i % 1000;
             frame->can_dlc = 8;
             ret = CANServiceManager::GetInstance().Send("vcan0", frame);
             if (ret != S_OK) {
                 ERR_MSG(ret);
             }
         }
-        usleep(1000);
+        usleep(10);
     }
     getchar();
     CANServiceManager::GetInstance().Deactive("vcan0");
