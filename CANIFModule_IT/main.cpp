@@ -2,9 +2,16 @@
 #include "CANIFModule.h"
 #include "Debug.h"
 #include <unistd.h>
+#include <iomanip>
 
 static void ReceiveCallback(const can_frame_ptr &frm) {
-    std::cerr << std::hex << frm->can_id << std::endl;
+    std::cerr <<  std::setfill('0') << std::setw(3) << std::hex << frm->can_id;
+    std::cerr << " [" << (int)frm->can_dlc << "] ";
+    for (uint8_t i = 0; i < frm->can_dlc; ++i) {
+        std::cerr << std::hex << (int)frm->data[i];
+        std::cerr << " ";
+    }
+    std::cerr << std::endl;
 }
 
 
