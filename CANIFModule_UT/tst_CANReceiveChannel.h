@@ -1,9 +1,9 @@
 /*****************************************************************************
     tst_CANReceiveChannel.h
 
-    Created: 02 2019 by quynhpp
+    Created: 02 2019 by shymaxtic
 
-    Copyright 2019 quynhpp. All rights reserved.
+    Copyright 2019 shymaxtic. All rights reserved.
 
     This file may be distributed under the terms of GNU Public License version
     3 (GPL v3) as defined by the Free Software Foundation (FSF). A copy of the
