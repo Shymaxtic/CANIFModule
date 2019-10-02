@@ -1,6 +1,7 @@
 language: cpp
 env:
   global:
+    secure: NVid3gIJ7jO1t0qqsZqAHdLNWxC9ZQsYKltMHLtkRYBaOjHk0FQS9nGYk4mXvnN664N1H2HqLuOIsjpzAFFOc4pJJ6+81CORrUGevidX08sIks+UmB/3eIPiBI9o8RSseHwz5s5SyZG6j+EZYn2gAySyjReXgCarLXDjnUpScyX7uM8GSG444DaDvTb1TJ/Aws0qVPJ5XEwuSPkQR7X9EeP2exqJVGJIKyTPq11GWhjRTKwhqcd0nRlZLlsOxDv6x9QgdjzenEgQ3EC5yFykvteefmR6ZHsEQE4TqZX60PKo2e9bWETSq5TOnmy+1uavbIP9IQ6yCVm8bqdBERDFVGK7qaBfIys1LmPG+Oy5XFhIArMeKayePCNXyTUfF4KKr0/Zty5hvCUM02QpRC3pKwXh2qWlpxau2yoONAL4uIDHq6AI7wJTDKfc8zcGFhk+hBWGVV7JHdojjtyJvXTP4fDYa5ahXCSzlvXWVgQDeFFk+CwaAcOTU4ABqNc7gtubbXGEkuhtyENMkcgBe+CYYBZuJ2dnvdKXh/LLQCTZ25mn2JViQzrNjFrOA5+XtV2RVvy9ssku/odlDRGmwSNg+wOPDaAbMTzdHyB93fbFGf+ys4JoyUmqOESLytEgGJrAd3dwORqVHzRW8xe7CW8A4rJDrju9k78ssRhLt6QZ6Os=
 before_install:
 - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END
   CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-certificates.crt
