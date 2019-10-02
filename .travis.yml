@@ -2,5 +2,24 @@ language: c++
 os: linux
 dist: bionic
 
+env:
+  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+   - secure: "guu0vPIn8V5xyw8Hp7G4BtN6coBd8xor7p3yOZTtZdXt0A9o/JYH8igoB7aEi2THgNkVII2KzwSCClEyMp+2JuOI/OpFG92oLWD4+HDUcu3sSiNP+WuaE6w8bWw+bqp/zrf0hewhZSkwSEnhbEZJR8Q6Ab0KYzrxdPpxU/3oM5uwPdP7fs1/aQDpqj6rnb8WY2gI8dvm9JuX61833i7Vw5afFmNBn55vNeOVD+MdWlsPp492Y3Mu/5zYX1A50X2Poml9Lpp31oektAJuvpH8SIxDm15GvwzbmT7j+X9j554VLB4jZSSZXL4TJF7+uxcFrpXBsi1Rj/z7Go+tgy7fB/S8hW4BY8PJoYTnv5suAKNHuynT5pOrZnQPqOJVnSqlCwzEg/b2GhnYMCQnQsiIKw4c/dMPLRoKuoAnsWhb85HJzPIkscp3R0/Hfl+d3t/W4V6eIi1RsEPdjq4gj9N9z3kmiCD0pQ1s84RlO05d5JNltpV6G4iv6zR5wXM45M1XkTPVB8CDPzvz09b2DwdBs5fqO9KO3Aotplm0/C1YFLRk0MAVA4KeVUusEikar8SiFmUE9Tqb1m/IwiwTm6eRJIySxJdHQeZfd+Avnx78cV2r3NCvgWMwHxom1Sewc4X7Z44In0JDFTmJEaJzRbKbfLlix7xVGjyfrL1V1SrUV28="
+
+before_install:
+  - echo -n | openssl s_client -connect https://scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
+
+addons:
+  coverity_scan:
+    project:
+      name: "Shymaxtic/CANIFModule"
+      description: "Posix CAN interface"
+    notification_email: shymaxtic@gmail.com
+    build_command_prepend: ""
+    build_command: "make"
+    branch_pattern: coverity_scan
+
 script: 
   - make
