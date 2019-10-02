@@ -19,7 +19,7 @@
 CANChannel::CANChannel(CANServiceIF *serviceIF, CANSocketIF *canIF) :
     mCANSrvIF(serviceIF),
     mCANSckIF(canIF) {
-    if (mCANSckIF == nullptr || mCANSckIF == nullptr) {
+    if (mCANSrvIF == nullptr || mCANSckIF == nullptr) {
         throw std::invalid_argument("nullptr is not permitted.");
     }
 }
