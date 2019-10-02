@@ -1,6 +1,4 @@
 language: c++
-os: linux
-dist: bionic
 
 env:
   global:
