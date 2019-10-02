@@ -1,14 +1,11 @@
 language: cpp
-
 env:
   global:
-   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
-   #   via the "travis encrypt" command using the project repo's public key
-   - secure: "pR9q4lFrg3nvtDEArMdtfegVCWO1Ed6o0vcgnJQaJ91Z/oO3dUq/zkhyEBxTz74e44CTDuhGvFiSq1ZCcrXVLc+/X0xrrqaTyZUScfJYCysGPxbZ+tEE3+wh9WlwZj3befBKft+cUodoAkzVIY7mLgoIh04GnaU8Fotjhse0zF24rg+YnZVrqnvv5st/k9bZBCg+kM7YLGKMcdMQNKD+8UQKYU2lm7n+qeyLdv3ZPZeq3vZmYxpc/9NkvyqznsILQML8E7DSm3bOOdpR4hTkWZWpeOoDPV6D4XK3G+u1xocgqdecippskIvKbItHwQUqdzFjlX1c6Nv5hMYLVMoK3gQxF5V5C08Ajgz4q5i6a0HAuQ5a51/8qoU5qWYnKL/0EqiOGzBRnCowpzSjN1hDdg3rS0Tmy5nfSafem9PRdTC/I1gylmv6rMOSsTlkjdxF4Pk859tGodrlqZ5Nly9xyFt3qfaG9sUXtFB8DX0Lhh//68iZrhRS+gEl5cAzyJO/qZgjQ5hiEF/jjAPqwzsA09xvUXRNlU00ciX3Vo1UwySPd6mgppPbJpFDk86wd9y/ETxuNFMAVAz/HAzyS3og3FJiyPuc3ZmGE6T2TvjTC35fxUhCl46I0JF4vv+3O76KOhBUBcl1VQWqD+KXCN/u2W+zfCyNT/KXixhVh4Gdj0Q="
-
+  - secure: pR9q4lFrg3nvtDEArMdtfegVCWO1Ed6o0vcgnJQaJ91Z/oO3dUq/zkhyEBxTz74e44CTDuhGvFiSq1ZCcrXVLc+/X0xrrqaTyZUScfJYCysGPxbZ+tEE3+wh9WlwZj3befBKft+cUodoAkzVIY7mLgoIh04GnaU8Fotjhse0zF24rg+YnZVrqnvv5st/k9bZBCg+kM7YLGKMcdMQNKD+8UQKYU2lm7n+qeyLdv3ZPZeq3vZmYxpc/9NkvyqznsILQML8E7DSm3bOOdpR4hTkWZWpeOoDPV6D4XK3G+u1xocgqdecippskIvKbItHwQUqdzFjlX1c6Nv5hMYLVMoK3gQxF5V5C08Ajgz4q5i6a0HAuQ5a51/8qoU5qWYnKL/0EqiOGzBRnCowpzSjN1hDdg3rS0Tmy5nfSafem9PRdTC/I1gylmv6rMOSsTlkjdxF4Pk859tGodrlqZ5Nly9xyFt3qfaG9sUXtFB8DX0Lhh//68iZrhRS+gEl5cAzyJO/qZgjQ5hiEF/jjAPqwzsA09xvUXRNlU00ciX3Vo1UwySPd6mgppPbJpFDk86wd9y/ETxuNFMAVAz/HAzyS3og3FJiyPuc3ZmGE6T2TvjTC35fxUhCl46I0JF4vv+3O76KOhBUBcl1VQWqD+KXCN/u2W+zfCyNT/KXixhVh4Gdj0Q=
+  - secure: Ik5besAfxtxSOE6V+mlQcfuGt0vUsDBgfc2qD38M4gh9q7k66FKiT/+uocEhlDl7jikna4ZQ+Xd0yrcYbnvCUnclb5WFFptbukK8b5wvNpQQyqRXNQs0YWNNQ0owe+HmKFYhmXMJHQpLGAeUGjGDcoaMIWHUSsW+fiD2C2XxEGb+5/BwfY2X3qvTwk6AF3KkirZKtFGCOiRiN4f3EBZCoDb88xwcLni8tJVsCDvXava2c/XMVW58E8WAUgLeKwnX2fSgayBPqBhC3RamUreaj4kfd00Ji4QJF3fL7CCBgNjErgLF6HkuW403yfyjb8CFfLy7OSU8U0l6/3G0qdbg2CLpSK78CtdKF8BGB8+PbKrMVRqI1U2z59UorInwbmy6JXBRhjkga6UHTx6mUXCX5ls/UrzoXk41nVk6jeLRPznnTz2fmZhc2COcwisHp3i5Wse5/GlXvuPcP5RlBK8WPkg/njNgZNJsKl4EwMBzvhhzFcpvup6CCK09WMGmlPX3nkU6zlxQ73VCSwvXP7M5mnrEIa0D/zIIgwQE5j7/OOp6zvepgbQr4fgE8LtQVQAEVzbEqYgcGxaFlshuCkcFw0h3B5hRWVnmHyJER+wSRISwfWTwuc385ynath8nEYJF7MMkAkbj/zH2xv1aYCb+2V/FX88yqC1AKvUxd8qNp+o=
 before_install:
-  - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-certificates.crt
-  
+- echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END
+  CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-certificates.crt
 addons:
   coverity_scan:
     project:
@@ -18,6 +15,5 @@ addons:
     build_command_prepend: make clean
     build_command: make
     branch_pattern: master
-
-script: 
-  - make
+script:
+- make
