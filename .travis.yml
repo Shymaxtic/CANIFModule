@@ -7,17 +7,17 @@ env:
    - secure: "g0BNLic3vQHGjYSm6unJzHH8L73ottvKyr2vPhn8xx0bnKE5c8IdW8k1iBajMQeLv9QygtRCynIVzLJ84TlXq1fZcvkJafBvhKYd5IdNaocOn31Twjx7lD++HX9pNob0Nllro4puhEyWTmLSt16BIPdfk+v8kuuz01c6OcnsF/SrpMy0cKTrSOhCzz27shXwXyHzEv9OH4BsI+JCl3Qow3fMFnRBHmdqM1PQnZTYH3WaozoCFLBCgHQDa8U7/gaw3jeoNlM6xi+arbuey1UkLtk42bPNT8zQDwVfEyahAhyEqYUuluclMtcR5LRPA7Ci9M/t/A9jj4rrbE4tH8cRSjAPRNQG6rCf4Rq6Bz0RzgPd3Fas/N3B8y29TZNehT7KA5F2aOEzFrKcgn0rvLQmV8l3S/26YjY6FDW0TkGVr6iIsX+jfhC3I5T9NTFjzknmCiqe55G1ov09gprd4/y9tF79rdVNutGrSp/8i97BO1yfuZL27mBxBkzkeVMA8eYHIGBO45SfUPVhkm0Mm2aJW4KWC0YXez2VQhYz3b7+rA5qsZ9ag5eeni4zwVE/2W9E9kqhrcptgbiv7Lj2HtCoNi7vCD3o1V+zKyDsdm56xJiCvSEITKreZPPrd4bcLA1P9XG6aywF2TnwFaKX2El7LQQmdMbcgjShuaF7wQPnJPo="
 
 before_install:
-  - echo -n | openssl s_client -connect https://scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
-
+  - echo -n | openssl s_client -connect https://scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-certificates.crt
+  
 addons:
   coverity_scan:
     project:
-      name: "Shymaxtic/CANIFModule"
-      description: "Posix CAN interface"
+      name: Shymaxtic/CANIFModule
+      description: Posix CAN interface
     notification_email: shymaxtic@gmail.com
-    build_command_prepend: ""
-    build_command: "make"
-    branch_pattern: coverity_scan
+    build_command_prepend: make clean
+    build_command: make
+    branch_pattern: master
 
 script: 
   - make
