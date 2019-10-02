@@ -41,4 +41,5 @@
 typedef std::shared_ptr<can_frame>  can_frame_ptr;
 typedef std::deque<can_frame_ptr>   can_frame_list;
 
+
 #endif // SYSTEMDEFINE_H
