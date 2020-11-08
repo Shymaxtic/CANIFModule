@@ -1,0 +1,24 @@
+Qt build
+16:12:58: Running steps for project libCANIFModule...
+16:12:58: Starting: "/home/quynhpp/Qt5.13.0/5.13.0/gcc_64/bin/qmake" /home/quynhpp/workspace/CANIFModule/src/libCANIFModule.pro -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug
+Info: creating stash file /home/quynhpp/workspace/CANIFModule/build-libCANIFModule-Desktop_Qt_5_13_0_GCC_64bit-Debug/.qmake.stash
+16:12:58: The process "/home/quynhpp/Qt5.13.0/5.13.0/gcc_64/bin/qmake" exited normally.
+16:12:58: Starting: "/usr/bin/make" -f /home/quynhpp/workspace/CANIFModule/build-libCANIFModule-Desktop_Qt_5_13_0_GCC_64bit-Debug/Makefile qmake_all
+make: Nothing to be done for 'qmake_all'.
+16:12:58: The process "/usr/bin/make" exited normally.
+16:12:58: Starting: "/usr/bin/make" -j4
+g++ -c -pipe -g -Wall -W -D_REENTRANT -fPIC -DLIBCANIFMODULE_LIBRARY -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -I../src -I. -I../../../Qt5.13.0/5.13.0/gcc_64/mkspecs/linux-g++ -o CANChannel.o ../src/CANChannel.cpp
+g++ -c -pipe -g -Wall -W -D_REENTRANT -fPIC -DLIBCANIFMODULE_LIBRARY -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -I../src -I. -I../../../Qt5.13.0/5.13.0/gcc_64/mkspecs/linux-g++ -o CANFrameFIFO.o ../src/CANFrameFIFO.cpp
+g++ -c -pipe -g -Wall -W -D_REENTRANT -fPIC -DLIBCANIFMODULE_LIBRARY -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -I../src -I. -I../../../Qt5.13.0/5.13.0/gcc_64/mkspecs/linux-g++ -o CANReceiveChannel.o ../src/CANReceiveChannel.cpp
+g++ -c -pipe -g -Wall -W -D_REENTRANT -fPIC -DLIBCANIFMODULE_LIBRARY -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -I../src -I. -I../../../Qt5.13.0/5.13.0/gcc_64/mkspecs/linux-g++ -o CANServiceIF.o ../src/CANServiceIF.cpp
+g++ -c -pipe -g -Wall -W -D_REENTRANT -fPIC -DLIBCANIFMODULE_LIBRARY -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -I../src -I. -I../../../Qt5.13.0/5.13.0/gcc_64/mkspecs/linux-g++ -o CANServiceManager.o ../src/CANServiceManager.cpp
+g++ -c -pipe -g -Wall -W -D_REENTRANT -fPIC -DLIBCANIFMODULE_LIBRARY -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -I../src -I. -I../../../Qt5.13.0/5.13.0/gcc_64/mkspecs/linux-g++ -o CANSocketIF.o ../src/CANSocketIF.cpp
+g++ -c -pipe -g -Wall -W -D_REENTRANT -fPIC -DLIBCANIFMODULE_LIBRARY -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -I../src -I. -I../../../Qt5.13.0/5.13.0/gcc_64/mkspecs/linux-g++ -o CANTransmitChannel.o ../src/CANTransmitChannel.cpp
+g++ -c -pipe -g -Wall -W -D_REENTRANT -fPIC -DLIBCANIFMODULE_LIBRARY -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -I../src -I. -I../../../Qt5.13.0/5.13.0/gcc_64/mkspecs/linux-g++ -o Semaphore.o ../src/Semaphore.cpp
+rm -f liblibCANIFModule.so.1.0.0 liblibCANIFModule.so liblibCANIFModule.so.1 liblibCANIFModule.so.1.0
+g++ -shared -Wl,-soname,liblibCANIFModule.so.1 -o liblibCANIFModule.so.1.0.0 CANChannel.o CANFrameFIFO.o CANReceiveChannel.o CANServiceIF.o CANServiceManager.o CANSocketIF.o CANTransmitChannel.o Semaphore.o  -lpthread    
+ln -s liblibCANIFModule.so.1.0.0 liblibCANIFModule.so
+ln -s liblibCANIFModule.so.1.0.0 liblibCANIFModule.so.1
+ln -s liblibCANIFModule.so.1.0.0 liblibCANIFModule.so.1.0
+16:13:00: The process "/usr/bin/make" exited normally.
+16:13:00: Elapsed time: 00:02.
