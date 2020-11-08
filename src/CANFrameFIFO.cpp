@@ -19,8 +19,8 @@
 
 
 CANFrameFIFO::CANFrameFIFO():
-    mAvailabeSem(D_MAXIMUM_FRM_FIFO, D_MAXIMUM_FRM_FIFO),
-    mUsedsem(D_MAXIMUM_FRM_FIFO, 0) {
+    mAvailabeSem(D_MAXIMUM_FRM_FIFO, D_MAXIMUM_FRM_FIFO), // maximum slot availalbe.
+    mUsedsem(D_MAXIMUM_FRM_FIFO, 0) {   // maximum slot availalbe
 }
 
 CANFrameFIFO::~CANFrameFIFO() {
@@ -28,33 +28,44 @@ CANFrameFIFO::~CANFrameFIFO() {
 }
 
 int CANFrameFIFO::Push(const can_frame_ptr &frm, uint64_t timeUs) {
-    if (mAvailabeSem.Acquire(timeUs) != S_OK) {
-        return S_ERR;
+
+    if (mAvailabeSem.Acquire(timeUs) != S_OK) { // Someone need a slot for new resource, check and wait for a while.
+        return S_ERR;   // oops! there is no any slot available.
     }
-    std::lock_guard<std::mutex> lkc(mMux);
+
+    std::lock_guard<std::mutex> lkc(mMux); // there is a slot, lock the door! I will do my job for this guy in the warehouse.
+
     if (mFrames.size() < D_MAXIMUM_FRM_FIFO) {
         mFrames.push_back(frm);
     }
     else {
-        return S_ERR;
+        return S_ERR; // oops, the warehouse is full!
     }
-    mUsedsem.Release();
+
+    mUsedsem.Release(); // a slot has been occuped. indicate to other guys.
+
     return S_OK;
 }
 
 int CANFrameFIFO::Pop(can_frame_ptr &frm, uint64_t timeUs) {
-    if (mUsedsem.Acquire(timeUs) != S_OK) {
-        return S_ERR;
+
+    if (mUsedsem.Acquire(timeUs) != S_OK) { // Someone need a resource from warehouse, check and wait for a while.
+        return S_ERR;           // oops! there is no any resource available.
     }
-    std::lock_guard<std::mutex> lkc(mMux);
+
+    std::lock_guard<std::mutex> lkc(mMux);  // there is a  slot, lock the door! I will get it for this guy.
+
     if (mFrames.empty() == false) {
         frm = mFrames.front();
         mFrames.pop_front();
     }
+
     else {
-        return S_ERR;
+        return S_ERR; // oops, the warehouse is empty!
     }
-    mAvailabeSem.Release();
+
+    mAvailabeSem.Release(); // I take a resurce, indicate to other guys that they can put at least a resource to ware house.
+
     return S_OK;
 }
 

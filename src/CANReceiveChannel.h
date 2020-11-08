@@ -23,7 +23,7 @@
 #include <thread>
 
 
-class CANReceiveChannel : public CANChannel {
+class CANReceiveChannel : public CANChannel { // I am a guy who is responesible for receive resources and stocks to the warehouse.
     public:
         CANReceiveChannel(CANServiceIF *serviceIF, CANSocketIF *canIF);
     public:

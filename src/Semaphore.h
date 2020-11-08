@@ -24,10 +24,10 @@
 class Semaphore {
     public:
         explicit Semaphore(uint32_t maxCnt = 1, uint32_t cnt = 0);
-        ~Semaphore();
+        virtual ~Semaphore();
     public:
-        int Release();
-        int Acquire(uint64_t time = 0);
+        int Release(); // indicate a resource is available.
+        int Acquire(uint64_t time = 0); // wait for a resource is available.
     private:
         uint32_t                mMaxCnt;
         uint32_t                mCnt;

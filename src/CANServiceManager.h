@@ -23,8 +23,10 @@
 #include "CANServiceIF.h"
 
 class CANServiceManager {
+
     private:
         CANServiceManager();
+        
     public:
         ~CANServiceManager();
         static CANServiceManager &GetInstance() {
@@ -33,6 +35,7 @@ class CANServiceManager {
             }
             return *gInstance;
         }
+
     public:
         int Connect(const std::string &sckName);
         int Disconnect(const std::string &sckName);
@@ -61,7 +64,7 @@ class CANServiceManager {
         }
     private:
         static std::shared_ptr<CANServiceManager> gInstance;
-        std::unordered_map<std::string, CANServiceIFPtr> mConnectedDevs;
+        std::unordered_map<std::string, CANServiceIFPtr> mConnectedDevs; // manage connected devices by name
 };
 
 #endif // CANSERVICEMANAGER_H

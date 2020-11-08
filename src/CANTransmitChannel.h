@@ -22,7 +22,7 @@
 #include <thread>
 
 
-class CANTransmitChannel : public CANChannel {
+class CANTransmitChannel : public CANChannel { // I am a guy who is responesible for take resouce and do the job.
     public:
         CANTransmitChannel(CANServiceIF *srvIF, CANSocketIF *canIF);
     public:

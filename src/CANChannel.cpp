@@ -16,6 +16,7 @@
     this file belongs to.
  *****************************************************************************/
 #include "CANChannel.h"
+
 CANChannel::CANChannel(CANServiceIF *serviceIF, CANSocketIF *canIF) :
     mCANSrvIF(serviceIF),
     mCANSckIF(canIF) {

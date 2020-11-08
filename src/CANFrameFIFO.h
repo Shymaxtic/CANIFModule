@@ -24,14 +24,17 @@
 #define D_MAXIMUM_FRM_FIFO      128
 
 
-class CANFrameFIFO {
+class CANFrameFIFO { // I am a warehosue for you guys.
+
     public:
         CANFrameFIFO();
         ~CANFrameFIFO();
+
     public:
-        int Push(const can_frame_ptr &frm, uint64_t timeUs = 0);
-        int Pop(can_frame_ptr &frms, uint64_t timeUs = 0);
-        int Clear();
+        int Push(const can_frame_ptr &frm, uint64_t timeUs = 0); // some one push a resource to me.
+        int Pop(can_frame_ptr &frms, uint64_t timeUs = 0);      // some one get a resource from me to do something.
+        int Clear();    // time for sale, clear the inventory.
+
     private:
         std::deque<can_frame_ptr>   mFrames;
         Semaphore                   mAvailabeSem;

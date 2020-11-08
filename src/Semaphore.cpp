@@ -31,11 +31,13 @@ Semaphore::~Semaphore() {
 }
 
 int Semaphore::Release() {
-    std::unique_lock<std::mutex> lcker(mLock);
+    std::unique_lock<std::mutex> lcker(mLock); // I take it, you guys should wait for me.
+
     if (mCnt == 0) {
         mCnt++;
-        mWait.notify_all();
+        mWait.notify_all(); //to you guys who need a resoure. Now a resource is available, take it and make something!
     }
+
     else {
         mCnt++;
         if (mCnt > mMaxCnt) {
@@ -47,17 +49,20 @@ int Semaphore::Release() {
 }
 
 int Semaphore::Acquire(uint64_t timeus) {
-    std::unique_lock<std::mutex> lcker(mLock);
-    if (mCnt > 0) {
+    std::unique_lock<std::mutex> lcker(mLock); // you guys wait for me.
+
+    if (mCnt > 0) {   // I take a resource.
         mCnt--;
         return S_OK;
     }
+
     else {
+
         if (timeus == 0) {
-            mWait.wait(lcker);
+            mWait.wait(lcker); // I wait forever.
         }
         else {
-            std::cv_status stt = mWait.wait_for(lcker, std::chrono::microseconds(timeus));
+            std::cv_status stt = mWait.wait_for(lcker, std::chrono::microseconds(timeus)); // I wait for a while. 
             return (stt == std::cv_status::no_timeout) ? S_OK : S_SEM_TIMEOUT;
         }
     }

@@ -24,15 +24,19 @@ class CANSocketIF;
 class CANServiceIF;
 
 class CANChannel {
+
     public:
         CANChannel(CANServiceIF *serviceIF, CANSocketIF *canIF);
         virtual ~CANChannel();
+
     public:
         virtual int Start() = 0;
         virtual int Stop() = 0;
+
     public:
         int Write(const can_frame_ptr &frm);
         int Read(can_frame_ptr &frm);
+        
     protected:
         bool            mIsStop = false;
         CANFrameFIFO    mFIFO;

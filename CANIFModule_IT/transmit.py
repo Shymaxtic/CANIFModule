@@ -13,6 +13,6 @@ for i in range(100):
 	fullcmd = cmd + str(i).zfill(3) + "#1326"
 	print(fullcmd)
 	os.system(fullcmd)
-	time.sleep(0.5)
+	time.sleep(0.1)
 
 

@@ -28,6 +28,7 @@ class CANServiceIF {
     public:
         CANServiceIF();
         UT_VIRTUAL ~CANServiceIF();
+        
     public:
         int Connect(const std::string sckNm);
         int Disconnect();
