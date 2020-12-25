@@ -1,7 +1,4 @@
 language: cpp
-env:
-  global:
-   - secure: xOS_2KvCgkODeDfrTrO6Kw
 
 before_install:
 - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END
