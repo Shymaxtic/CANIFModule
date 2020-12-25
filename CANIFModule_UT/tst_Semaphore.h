@@ -29,14 +29,14 @@ using namespace testing;
 #include "Semaphore.h"
 
 TEST(Semaphore, CANIFModuleTestSet) {
-    Semaphore testSem1;
+    Semaphore<> testSem1;
     EXPECT_EQ(testSem1.mCnt, 0);
     EXPECT_EQ(testSem1.mMaxCnt, 1);
 }
 
 TEST(Semaphore2, CANIFModuleTestSet) {
     try {
-        Semaphore testSem1(0, 0);
+        Semaphore<0> testSem1(0);
     }
     catch (std::invalid_argument &e) {
         EXPECT_EQ(e.what(), std::string("max count must greater than 0."));
@@ -44,25 +44,25 @@ TEST(Semaphore2, CANIFModuleTestSet) {
 }
 
 TEST(Semaphore3, CANIFModuleTestSet) {
-    Semaphore testSem1(1, 1);
+    Semaphore<1> testSem1(1);
     testSem1.Acquire();
     EXPECT_EQ(testSem1.mCnt, 0);
 }
 
 TEST(Semaphore4, CANIFModuleTestSet) {
-    Semaphore testSem1(1, 0);
+    Semaphore<1> testSem1(0);
     testSem1.Release();
     EXPECT_EQ(testSem1.mCnt, 1);
 }
 
 TEST(Semaphore5, CANIFModuleTestSet) {
-    Semaphore testSem1(1, 1);
+    Semaphore<1> testSem1(1);
     testSem1.Release();
     EXPECT_EQ(testSem1.mCnt, testSem1.mMaxCnt);
 }
 
 TEST(Semaphore6, CANIFModuleTestSet) {
-    Semaphore testSem1(1, 0);
+    Semaphore<1> testSem1(0);
     int test = testSem1.Acquire(1000);
     EXPECT_EQ(test, S_SEM_TIMEOUT);
 }

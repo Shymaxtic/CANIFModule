@@ -32,7 +32,6 @@ SOURCES += \
         ../src/CANServiceManager.cpp \
         ../src/CANSocketIF.cpp \
         ../src/CANTransmitChannel.cpp \
-        ../src/Semaphore.cpp \
         main.cpp
 
 

@@ -19,8 +19,8 @@
 
 
 CANFrameFIFO::CANFrameFIFO():
-    mAvailabeSem(D_MAXIMUM_FRM_FIFO, D_MAXIMUM_FRM_FIFO), // maximum slot availalbe.
-    mUsedsem(D_MAXIMUM_FRM_FIFO, 0) {   // maximum slot availalbe
+    mAvailabeSem(D_MAXIMUM_FRM_FIFO), // maximum slot availalbe.
+    mUsedsem(0) {   // maximum slot availalbe
 }
 
 CANFrameFIFO::~CANFrameFIFO() {

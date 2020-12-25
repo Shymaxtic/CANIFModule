@@ -36,10 +36,10 @@ class CANFrameFIFO { // I am a warehosue for you guys.
         int Clear();    // time for sale, clear the inventory.
 
     private:
-        std::deque<can_frame_ptr>   mFrames;
-        Semaphore                   mAvailabeSem;
-        Semaphore                   mUsedsem;
-        std::mutex                  mMux;
+        std::deque<can_frame_ptr>           mFrames;
+        Semaphore<D_MAXIMUM_FRM_FIFO>       mAvailabeSem;
+        Semaphore<D_MAXIMUM_FRM_FIFO>       mUsedsem;
+        std::mutex                          mMux;
 
 };
 #endif // CANFRAMEFIFO_H
