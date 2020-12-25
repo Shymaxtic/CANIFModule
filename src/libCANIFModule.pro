@@ -29,8 +29,7 @@ SOURCES += \
     CANServiceIF.cpp \
     CANServiceManager.cpp \
     CANSocketIF.cpp \
-    CANTransmitChannel.cpp \
-    Semaphore.cpp
+    CANTransmitChannel.cpp
 
 HEADERS += \
     CANChannel.h \

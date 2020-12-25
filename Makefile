@@ -5,6 +5,7 @@ LDFLAGS 	:= -shared
 BUILDDIR 	:= ./build
 SRCDIR 		:= ./src
 TARGET 		:= $(BUILDDIR)/libCANIFModule.so 
+INCLUDEDIR	:= ./src
 
 SRCS := $(wildcard $(SRCDIR)/*.cpp)
 OBJS = $(patsubst $(SRCDIR)/%.cpp,$(BUILDDIR)/%.o,$(SRCS))
@@ -18,4 +19,4 @@ $(TARGET): $(OBJS)
 	$(CC) $(LDFLAGS) -o $@ $^
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.cpp
-	$(CC) $(CPPFLAGS) -c -o $@ $<
+	$(CC) $(CPPFLAGS) -I$(INCLUDEDIR) -c -o $@ $<
