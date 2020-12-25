@@ -2,6 +2,7 @@
   <img alt="Coverity Scan Build Status"
        src="https://scan.coverity.com/projects/19287/badge.svg"/>
 </a> 
+
 [![Build Status](https://travis-ci.org/Shymaxtic/CANIFModule.svg?branch=master)](https://travis-ci.org/Shymaxtic/CANIFModule)
 
 
